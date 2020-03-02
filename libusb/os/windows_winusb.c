@@ -3896,6 +3896,7 @@ static int composite_open(int sub_api, struct libusb_device_handle *dev_handle)
 		}
 	}
 
+#if 0
 	if (available[SUB_API_MAX]) { // HID driver
 		r = hid_open(SUB_API_NOTSET, dev_handle);
 
@@ -3907,7 +3908,7 @@ static int composite_open(int sub_api, struct libusb_device_handle *dev_handle)
 			r = LIBUSB_SUCCESS;
 		}
 	}
-
+#endif
 	return r;
 }
 
