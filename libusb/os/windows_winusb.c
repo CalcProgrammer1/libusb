@@ -492,6 +492,13 @@ static int windows_assign_endpoints(struct libusb_device_handle *dev_handle, int
 		usbi_warn(HANDLE_CTX(dev_handle), "could not read config descriptor: error %d", r);
 		return r;
 	}
+	
+	/* HACK to work around out-of-order interface numbers on ASUS X570 Aura controller */
+	if (iface == 2 && conf_desc->bNumInterfaces == 2)
+	{
+		iface = 1;
+		altsetting = 1;
+	}
 
 	if_desc = &conf_desc->interface[iface].altsetting[altsetting];
 	safe_free(priv->usb_interface[iface].endpoint);
